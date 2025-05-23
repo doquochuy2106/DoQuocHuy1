@@ -1,6 +1,5 @@
 {
   "name": "jwtbackend",
-  "type": "module",
   "version": "1.0.0",
   "description": "jwt nodejs react",
   "main": "server.js",
