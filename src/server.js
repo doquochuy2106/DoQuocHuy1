@@ -3,6 +3,9 @@ import configViewEngine from "./configs/viewEngine.js"
 import initwebRoutes from "./routes/web.js"
 import dotenv from 'dotenv';
 dotenv.config();
+import bodyParser from "body-parser";
+
+
 
 const app = express()
 const PORT = process.env.PORT || 8082;
@@ -10,8 +13,13 @@ const PORT = process.env.PORT || 8082;
 //configViewEngine
 configViewEngine(app);
 
+//config body-parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //initwebRouters
 initwebRoutes(app)
+
 
 
 app.listen(PORT, () => {
