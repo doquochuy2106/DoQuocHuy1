@@ -3,10 +3,10 @@ import userService from "../service/userService.js"
 const handleHelloWord = (req, res) => {
     return res.render("home.ejs")
 }
-const handleUserpage = (req, res) => {
+const handleUserpage = async (req, res) => {
     //model => get data from database
-
-    return res.render("user.ejs")
+    let userList = await userService.getUserList();
+    return res.render("user.ejs", { userList })
 }
 const handleCreateNewUser = (req, res) => {
     let email = req.body.email;
@@ -14,7 +14,7 @@ const handleCreateNewUser = (req, res) => {
     let username = req.body.username;
 
     // userService.createNewuser(email, password, username);
-    userService.getUserList();
+
 
     return res.send("handleCreateNewUser")
 }
