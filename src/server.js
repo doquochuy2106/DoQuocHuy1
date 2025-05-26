@@ -4,7 +4,7 @@ import initwebRoutes from "./routes/web.js"
 import dotenv from 'dotenv';
 dotenv.config();
 import bodyParser from "body-parser";
-
+import connection from "./config/connectDB.js";
 
 
 const app = express()
@@ -16,6 +16,9 @@ configViewEngine(app);
 //config body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// test connection db
+connection();
 
 //initwebRouters
 initwebRoutes(app)
