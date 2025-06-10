@@ -10,6 +10,28 @@ import bodyParser from "body-parser";
 const app = express()
 const PORT = process.env.PORT || 8082;
 
+//Add header before the routes are defined
+app.use(function (req, res, next) {
+    //website you wish to allow to connnect
+    res.setHeader('Access-Control-Allow-Origin', process.env.REACT_URL);
+
+    //request method you wish to allow
+    res.setHeader('Access-Control-Allow-Method', 'GET, POST, PUT, PATH, DELETE')
+
+    //Request header you wish to allow
+    res.setHeader('Access-Controll-Allow-Headers', 'X-Request-with,content-type');
+
+    //Set to true if you need the website include cookies in the  request sent
+    //to the API(e.g. in case you use session)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    //Pass to next layer of middleware
+    next();
+});
+
+
+
+
 //configViewEngine
 configViewEngine(app);
 
