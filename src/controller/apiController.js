@@ -41,10 +41,16 @@ const handleRegister = async (req, res) => {
             DT: '',//date   
         })
     }
+}
 
-    console.log(">>>Call me", req.body)
+const handleLogin = async (req, res) => {
+    console.log("check login from react: ", req.body)
+    return res.status(200).json({
+        message: "ok",
+        data: "test api login"
+    })
 }
 
 module.exports = {
-    testAPI, handleRegister
+    testAPI, handleRegister, handleLogin
 }
