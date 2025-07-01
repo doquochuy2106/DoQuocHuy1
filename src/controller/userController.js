@@ -14,7 +14,7 @@ const readFunc = async (req, res) => {
                 DT: data.DT
             })
 
-            console.log(">>> check data: ", "page= ", page, "limit= ", limit)
+
         } else {
             let data = await userApiService.getAllUser();
             return res.status(200).json({
@@ -36,9 +36,15 @@ const readFunc = async (req, res) => {
     }
 }
 
-const createFunc = (req, res) => {
+const createFunc = async (req, res) => {
     try {
-
+        //validate
+        let data = await userApiService.createNewUser(req.body);
+        return res.status(200).json({
+            EM: data.EM,
+            EC: data.EC,
+            DT: data.DT
+        })
     } catch (error) {
         console.log(err);
         return res.status(500).json({
