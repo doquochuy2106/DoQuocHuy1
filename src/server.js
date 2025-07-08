@@ -7,7 +7,6 @@ dotenv.config();
 import bodyParser from "body-parser";
 import configCors from "./config/cors.js";
 // import connection from "./config/connectDB.js";
-import { createJWT, verifyToken } from "./middleware/JWTAction.js"
 
 
 const app = express()
@@ -26,10 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // test connection db
 // connection();
 
-//test JWT
-createJWT();
-let decodedData = verifyToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZG9xdW9jaHV5IiwiYWRkcmVzcyI6ImhvIGNoaSBtaW5oIiwiaWF0IjoxNzUxODYyMTEzfQ.zdNAofaKrkB_cp9hfyJkAlP-1R4wpS4cnujT3D-_x_4");
-console.log(decodedData)
+
 
 //initwebRouters
 initwebRoutes(app)
