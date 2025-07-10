@@ -6,6 +6,14 @@ const handleHelloWord = (req, res) => {
 
 const handleUserpage = async (req, res) => {
     //model => get data from database
+    //cookies that have not been signed
+    console.log('Cookies: ', req.cookies)
+
+
+
+    //Cookies that have been signed
+    console.log('Signed Cookies: ', req.signedCookies)
+
     let userList = await userService.getUserList();
     return res.render("user.ejs", { userList })
 }
