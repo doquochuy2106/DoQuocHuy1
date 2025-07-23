@@ -1,8 +1,7 @@
+import { where } from 'sequelize/dist/index.js';
 import db from '../models/index';
 const createNewRoles = async (roles) => {
     try {
-
-
         let currentRoles = await db.Role.findAll({
             attributes: ['url', 'description'],
             raw: true
@@ -34,6 +33,53 @@ const createNewRoles = async (roles) => {
     }
 }
 
+const getAllRole = async () => {
+    try {
+        let data = await db.Role.findAll({
+            order: [['id', 'DESC']]
+        })
+        return {
+            EM: `Get all Role succeeds`,
+            EC: 0,
+            DT: data
+        }
+
+    } catch (error) {
+        console.log(error)
+        return {
+            EM: 'something wrongs with servies',
+            EC: 1,
+            DT: []
+        }
+    }
+
+}
+
+const deleteRole = async (id) => {
+    try {
+        let role = await db.Role.findOne({
+            where: { id: id }
+        })
+        if (role) {
+            await role.destroy();
+        }
+
+        return {
+            EM: `Delete Role succeeds`,
+            EC: 0,
+            DT: []
+        }
+
+    } catch (error) {
+        console.log(error)
+        return {
+            EM: 'something wrongs with servies',
+            EC: 1,
+            DT: []
+        }
+    }
+}
+
 module.exports = {
-    createNewRoles
+    createNewRoles, getAllRole, deleteRole
 }
