@@ -67,7 +67,8 @@ const checkUserJWT = (req, res, next) => {
 }
 
 const checkUserPermission = (req, res, next) => {
-    if (nonSecurePaths.includes(req.path)) return next();
+    if (nonSecurePaths.includes(req.path) || req.path === '/account') return next();
+    console.log(req.path)
 
     if (req.user) {
         let email = req.user.email;
@@ -80,7 +81,7 @@ const checkUserPermission = (req, res, next) => {
                 EM: `you don't permission to access this resource...`
             })
         }
-        let canAccess = roles.some(item => item.url === currentUrl);
+        let canAccess = roles.some(item => item.url === currentUrl || currentUrl.includes(item.url));
         if (canAccess === true) {
             next();
         } else {
